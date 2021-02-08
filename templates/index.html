@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <ul>
+    {% for song in songs %}
+    <li>{{ song.name }} - {{ song.duration }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
