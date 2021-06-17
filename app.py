@@ -1,7 +1,10 @@
+from forms import LoginForm
 from flask import Flask
 from flask import render_template
+from config import Config
 
 app = Flask("app")
+app.config.from_object(Config)
 
 @app.route("/")
 def home():
@@ -28,5 +31,9 @@ def users():
 def about():
   return render_template('about.html', about='about text', title='about')
 
+@app.route("/login")
+def login():
+  form = LoginForm()
+  return render_template('login.html', form=form)
 
 app.run()
