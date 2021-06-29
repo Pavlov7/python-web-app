@@ -1,6 +1,5 @@
 from forms import LoginForm
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, flash, redirect
 from config import Config
 
 app = Flask("app")
@@ -31,9 +30,13 @@ def users():
 def about():
   return render_template('about.html', about='about text', title='about')
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
   form = LoginForm()
+  if form.validate_on_submit():
+    flash('Successfully logged in as {}'.format(form.username.data))
+    return redirect('/')
+
   return render_template('login.html', form=form)
 
 app.run()
